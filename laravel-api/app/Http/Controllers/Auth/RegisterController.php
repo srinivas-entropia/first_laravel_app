@@ -110,27 +110,26 @@ class RegisterController extends Controller
     }
 	public function DashboardData(){
         //die("ok");
-        if(Auth::guard('api')->check()){
+        //if(Auth::guard('api')->check()){
             $reaponseData['status'] = "success";
             $reaponseData['errors']= [];
-            $reaponseData['result'] = [
-                                        "BUDGET"=>"$24,500",
-                                        "TOTAL_HOURS"=>"763.5",
-                                        "PROGRESS"=>"84.5%",
-                                        "COST_UNIT"=>"$5.50",
-                                        "EARNINGS"=>"$19.2k",
-                                        "SESSIONS"=>"$92.1k",
-                                        "BOUNCE"=>"50.2%",
-                                        
-
+            $reaponseData['result']['stats'] = [
+                                        "EARNINGS_MONTHLY"=>"40,000",
+                                        "EARNINGS_ANNUAL"=>"215,000",
+                                        "TASKS"=>"50",
+                                        "PENDING_REQUEST"=>"18",
                                     ];
+           $reaponseData['result']['donut_stats']['options']    = [];
+           $reaponseData['result']['donut_stats']['series']     = [44, 55, 41, 17, 15];
+           $reaponseData['result']['chart_stats']['options']    = [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998];
+           $reaponseData['result']['chart_stats']['series']     = [30, 40, 45, 50, 49, 60, 70, 91];
             return response()->json(['data' => $reaponseData], 200);
-        }else{
+        /*}else{
             $reaponseData['status'] = "fail";
             $reaponseData['errors']= [];
             $reaponseData['result'] = [];
             return response()->json(['data' => $reaponseData], 200);
-        }
+        }*/
 		
 	}
 
