@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Log;
 class RegisterController extends Controller
 {
     /*
@@ -99,17 +100,32 @@ class RegisterController extends Controller
         
     }
     public function logout(Request $request){
-        
-        Auth::guard('api')->user()->AauthAcessToken()->delete(); 
-        $reaponseData['status'] = "success";
-        $reaponseData['errors']= [];
-        $reaponseData['result'] = $user;
-        $reaponseData['result']['token']="Bearer ".$user->createToken("Laravel API")->accessToken;
-        return response()->json(['data' => $reaponseData], 200);
+
+        Log::debug("logout - ok");
+        Log::debug($request);
+        Log::debug($request->header('Authorization'));
+       //echo $request->header('Authorization');
+        //die("ok");
+        ///dd($request->header('Authorization'));
+        if(Auth::guard('api')->check()){
+            $user = Auth::guard('api')->user()->token();
+            $user->revoke();
+            //Auth::guard('api')->user()->AauthAcessToken()->delete(); 
+            $reaponseData['status'] = "success";
+            $reaponseData['errors']= [];
+            $reaponseData['result'] = true;
+            //$reaponseData['result']['token']="Bearer ".$user->createToken("Laravel API")->accessToken;
+            return response()->json(['data' => $reaponseData], 200);
+        }else{
+            $reaponseData['status'] = "fail";
+            $reaponseData['errors']= [];
+            $reaponseData['result'] = [];
+            return response()->json(['data' => $reaponseData], 200);
+        }
         
     }
 	public function DashboardData(){
-        //die("ok");
+        
         //if(Auth::guard('api')->check()){
             $reaponseData['status'] = "success";
             $reaponseData['errors']= [];

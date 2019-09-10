@@ -16,8 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+\Log::debug("cors chewcking in route doesnt exist");
 Route::group(['middleware' => ['api', 'cors'],'namespace' => 'Auth'],function(){
+    \Log::debug("cors chewcking in route exist");
     Route::post('signup', 'RegisterController@create');
     Route::post('login', 'RegisterController@login');
-	Route::get('dashboard-data', 'RegisterController@DashboardData');
+    Route::get('dashboard-data', 'RegisterController@DashboardData');
+    Route::post('logout', 'RegisterController@logout');
 });
