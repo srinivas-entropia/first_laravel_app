@@ -135,7 +135,7 @@ class RegisterController extends Controller
                                         "TASKS"=>"50",
                                         "PENDING_REQUEST"=>"18",
                                     ];
-           $reaponseData['result']['donut_stats']['options']    = [];
+           $reaponseData['result']['donut_stats']['options']    = (object)[];
            $reaponseData['result']['donut_stats']['series']     = [44, 55, 41, 17, 15];
            $reaponseData['result']['chart_stats']['options']    = [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998];
            $reaponseData['result']['chart_stats']['series'][0]     = [30, 40, 45, 50, 49, 60, 70, 91];
