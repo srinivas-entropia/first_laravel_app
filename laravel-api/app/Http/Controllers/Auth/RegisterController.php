@@ -126,7 +126,7 @@ class RegisterController extends Controller
     }
 	public function DashboardData(){
         
-        //if(Auth::guard('api')->check()){
+        if(Auth::guard('api')->check()){
             $reaponseData['status'] = "success";
             $reaponseData['errors']= [];
             $reaponseData['result']['stats'] = [
@@ -138,14 +138,15 @@ class RegisterController extends Controller
            $reaponseData['result']['donut_stats']['options']    = [];
            $reaponseData['result']['donut_stats']['series']     = [44, 55, 41, 17, 15];
            $reaponseData['result']['chart_stats']['options']    = [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998];
-           $reaponseData['result']['chart_stats']['series']     = [30, 40, 45, 50, 49, 60, 70, 91];
+           $reaponseData['result']['chart_stats']['series'][0]     = [30, 40, 45, 50, 49, 60, 70, 91];
+           $reaponseData['result']['chart_stats']['series'][1]     = [10, 20, 25, 40, 59, 60, 75, 81];
             return response()->json(['data' => $reaponseData], 200);
-        /*}else{
+        }else{
             $reaponseData['status'] = "fail";
             $reaponseData['errors']= [];
             $reaponseData['result'] = [];
             return response()->json(['data' => $reaponseData], 200);
-        }*/
+        }
 		
 	}
 
